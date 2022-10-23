@@ -1,0 +1,46 @@
+Graph Traversal
+def dfs(graph, cur, visited):
+    if cur in visited:
+        return
+
+    visited.add(cur)
+    print(cur, end=" ");
+
+    for next in graph[cur]:
+        dfs(graph, next, visited)
+
+from collections import deque
+
+def bfs(graph, node):
+    q = deque([node])
+    visited = {node}
+
+    while q:
+        cur = q.popleft()
+
+        print(cur, end=" ")
+
+        for next in graph[cur]:
+            if next in visited:
+                continue
+
+            q.append(next)
+            visited.add(next)
+
+
+graph = {
+    0 : [1,6],
+    1 : [0,2,3],
+    2 : [1,4],
+    3 : [1,4,5],
+    4 : [2,3,5],
+    5 : [3,4],
+    6 : [0]
+}
+print("DFS: ", end = "")
+dfs(graph, 2, set())
+print()
+print("BFS: ", end = "")
+bfs(graph, 2)
+
+
